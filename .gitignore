@@ -1,0 +1,7 @@
+# 忽略target目录
+target/
+# 忽略eclipse的工程文件
+.classpath
+.project
+.settings/
+
