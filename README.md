@@ -2,6 +2,19 @@
 
 An api manager built on spring4 and angular2.
 
+## Maven 镜像
+
+Maven 官方的中央仓库在国内下载速度很慢，建议配置为阿里云的镜像，速度飞起：
+
+```
+<mirror>
+	<id>alimaven</id>
+	<mirrorOf>central</mirrorOf>
+	<name>aliyun maven</name>
+	<url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+</mirror>
+```
+
 ## 配置数据源
 
 在 tomcat 的 conf/context.xml 添加如下代码：
