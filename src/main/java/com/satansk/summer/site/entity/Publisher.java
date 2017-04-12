@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity(name = "PublisherEntity")
 @Table(
@@ -24,7 +25,10 @@ public class Publisher implements Serializable {
 	private String address;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "PublisherGenerator")
+	@TableGenerator(name = "PublisherGenerator", table = "SurrogateKeys", 
+		pkColumnName = "TableName", pkColumnValue = "Publishers", 
+		valueColumnName = "KeyValue", initialValue = 11923, allocationSize = 1)
 	@Column(name = "PublisherId")
 	public long getId() {
 		return id;
@@ -50,4 +54,9 @@ public class Publisher implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	@Override
+	public String toString() {
+		return "Publisher [id=" + id + ", name=" + name + ", address=" + address + "]";
+	}	
 }
