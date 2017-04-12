@@ -31,10 +31,19 @@
 		<!-- 关闭实体上的 Bean 验证 -->
 		<validation-mode>NONE</validation-mode>
 		
-		<!-- 禁用模式生成 -->
 		<properties>
+			<!-- 禁用模式生成 -->
 			<property name="javax.persistence.schema-generation.database.action" value="none" />
+			
+			<!-- 使用 MySQL 方言 -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+
+			<!-- 显示 SQL 语句 -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- 格式化输出 SQL -->
+			<property name="hibernate.format_sql" value="true" />
+			<!-- 显示生成 SQL 语句的 HQL 语句 -->
+			<property name="hibernate.use_sql_comments" value="true" />
 		</properties>
 	</persistence-unit>
 
