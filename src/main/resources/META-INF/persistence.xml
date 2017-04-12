@@ -34,6 +34,7 @@
 		<!-- 禁用模式生成 -->
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action" value="none" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		</properties>
 	</persistence-unit>
 
