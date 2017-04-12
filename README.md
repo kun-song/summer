@@ -24,7 +24,7 @@ Maven 官方的中央仓库在国内下载速度很慢，建议配置为阿里�
       name = "jdbc/EntityMappings" type = "javax.sql.DataSource"
       maxActive = "20" maxIdle = "5" maxWait = "10000"
       username = "root" password = "329015802"
-      driverClass = "com.mysql.jdbc.Driver"
+      driverClassName = "com.mysql.jdbc.Driver"
       url = "jdbc:mysql://localhost/EntityMappings"
       />
 ```
