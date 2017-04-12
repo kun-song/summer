@@ -18,7 +18,7 @@ import javax.persistence.Table;
 				@Index(name = "Authors_Names", columnList = "AuthorName")
 		}
 		)
-public class Aurthor implements Serializable {
+public class Author implements Serializable {
 	private long id;
 	private String name;
 	private String emailAddress;
