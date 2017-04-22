@@ -4,10 +4,14 @@ package com.satansk.summer.config;
 import java.util.Hashtable;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -36,7 +40,10 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 		basePackages = "com.satansk.summer.site",
 		excludeFilters = @ComponentScan.Filter({ Controller.class, ControllerAdvice.class })
 		)
-public class RootContextConfiguration implements TransactionManagementConfigurer {
+public class RootContextConfiguration {
+	
+	private static final Logger log = LogManager.getLogger();
+	
     @Bean
     public ObjectMapper objectMapper()
     {
@@ -67,21 +74,21 @@ public class RootContextConfiguration implements TransactionManagementConfigurer
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
     	Map<String, Object> properties = new Hashtable<>();
-    	properties.put("javax.persistence.schema-generation.database.action", "none");
-    	
-    	HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-    	adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5InnoDBDialect");
-    	
-    	LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-    	factory.setJpaVendorAdapter(adapter);
-    	// 上面获取的 DataSource
-    	factory.setDataSource(this.springJpaDataSource());
-    	factory.setPackagesToScan("com.satansk.summer.site.entity");
-    	factory.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
-    	factory.setValidationMode(ValidationMode.NONE);
-    	factory.setJpaPropertyMap(properties);
-    	
-    	return factory;
+        properties.put("javax.persistence.schema-generation.database.action", "none");
+
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5InnoDBDialect");
+        adapter.setShowSql(false);
+
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(adapter);
+        factory.setDataSource(this.springJpaDataSource());
+        factory.setPackagesToScan("com.satansk.summer.site.entity");
+        factory.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
+        factory.setValidationMode(ValidationMode.NONE);
+        factory.setJpaPropertyMap(properties);
+        
+        return factory;
     }
     
     /**
@@ -99,7 +106,7 @@ public class RootContextConfiguration implements TransactionManagementConfigurer
      * 2. Spring 总是使用 TransactionManagementConfigurer 接口的 annotationDrivenTransactionManager 方法返回的
      * 		管理器作为 @Transactional 方法的默认管理器。
      */
-	@Override
+	@Bean
 	public PlatformTransactionManager annotationDrivenTransactionManager() {
 		return this.jpaTransactionManager();
 	}
