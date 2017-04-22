@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.satansk.summer.config.annotation.RestEndpoint;
-import com.satansk.summer.site.entity.Account;
+import com.satansk.summer.site.bean.Account;
 import com.satansk.summer.site.exception.ResourceNotFoundException;
 import com.satansk.summer.site.form.AccountForm;
 import com.satansk.summer.site.service.AccountService;

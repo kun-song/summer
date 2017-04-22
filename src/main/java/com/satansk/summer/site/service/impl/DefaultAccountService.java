@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.satansk.summer.site.entity.Account;
+import com.satansk.summer.site.bean.Account;
 import com.satansk.summer.site.service.AccountService;
 
 @Service

@@ -1,4 +1,4 @@
-package com.satansk.summer.site.entity;
+package com.satansk.summer.site.bean;
 
 import java.time.Instant;
 

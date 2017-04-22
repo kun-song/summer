@@ -2,7 +2,7 @@ package com.satansk.summer.site.service;
 
 import java.util.List;
 
-import com.satansk.summer.site.entity.Account;
+import com.satansk.summer.site.bean.Account;
 
 public interface AccountService {
 	public List<Account> getAllAccounts();
