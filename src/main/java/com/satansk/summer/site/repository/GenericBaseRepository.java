@@ -24,7 +24,7 @@ public abstract class GenericBaseRepository<I extends Serializable, E extends Se
 				throw new IllegalStateException();
 			}
 			
-			genericSuperclass = ((Class)genericSuperclass).getGenericSuperclass();
+			genericSuperclass = ((Class<?>)genericSuperclass).getGenericSuperclass();
 		}
 		
 		ParameterizedType type = (ParameterizedType) genericSuperclass;
