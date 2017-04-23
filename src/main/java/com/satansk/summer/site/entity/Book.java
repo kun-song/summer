@@ -25,6 +25,9 @@ import javax.persistence.UniqueConstraint;
 				@Index(name = "Books_Titles", columnList = "title")
 		})
 public class Book implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 	private String isbn;
 	private String title;
