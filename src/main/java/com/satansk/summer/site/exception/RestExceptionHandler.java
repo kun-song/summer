@@ -3,14 +3,8 @@ package com.satansk.summer.site.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.satansk.summer.config.annotation.RestEndpointAdvice;
 
