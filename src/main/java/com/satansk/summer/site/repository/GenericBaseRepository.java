@@ -14,7 +14,7 @@ public abstract class GenericBaseRepository<I extends Serializable, E extends Se
 		
 		Type genericSuperclass = this.getClass().getGenericSuperclass();
 		
-		while (! (genericSuperclass instanceof Class)) {
+		while (! (genericSuperclass instanceof ParameterizedType)) {
 			
 			if (! (genericSuperclass instanceof Class)) {
 				throw new IllegalStateException();
