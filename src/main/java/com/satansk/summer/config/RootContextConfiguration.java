@@ -8,8 +8,6 @@ import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.sql.DataSource;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,18 +26,21 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+/**
+ * 设置 ComponentScan 目录为整个项目代码包，包括配置类包，方便将配置分离
+ * 
+ * @author satansk
+ */
 @Configuration
 @EnableTransactionManagement(
         mode = AdviceMode.PROXY, proxyTargetClass = false,
         order = Ordered.LOWEST_PRECEDENCE
 )
 @ComponentScan(
-		basePackages = "com.satansk.summer.site",
+		basePackages = "com.satansk.summer",
 		excludeFilters = @ComponentScan.Filter({ Controller.class, ControllerAdvice.class })
 		)
 public class RootContextConfiguration {
-	
-	private static final Logger log = LogManager.getLogger();
 	
     @Bean
     public ObjectMapper objectMapper()
