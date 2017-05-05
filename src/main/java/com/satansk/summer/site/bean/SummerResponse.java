@@ -1,5 +1,6 @@
 package com.satansk.summer.site.bean;
 
+//TODO 将接口的响应类型设置为 ResponseEntity<?> 或者使用 @ResponseBody 注解，可以避免创建 SummerResponse
 /**
  * Summer 统一响应类型
  * 
