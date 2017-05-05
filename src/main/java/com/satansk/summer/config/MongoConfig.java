@@ -11,7 +11,7 @@ import com.mongodb.MongoClient;
  * MongoDB 配置，MongoTemplate 已经定义在 AbstractMongoConfiguration 中。
  */
 @Configuration
-@EnableMongoRepositories(basePackages = "com.satansk.summer.site.mongoentity")
+@EnableMongoRepositories(basePackages = "com.satansk.summer.site.repository")
 public class MongoConfig extends AbstractMongoConfiguration {
 	
 	private static final String dbName = "Summer";

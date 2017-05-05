@@ -28,7 +28,7 @@ public class HistoryNoteRestEndpoint {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@ResponseBody
 	public SummerResponse addHistoryNote(@RequestBody HistoryNote note) {
 		
