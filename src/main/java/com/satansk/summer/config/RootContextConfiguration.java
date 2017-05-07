@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -25,24 +27,33 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
 /**
- * 设置 ComponentScan 目录为整个项目代码包，包括配置类包，方便将配置分离
+ * 1. 设置 ComponentScan 目录为整个项目代码包，包括配置类包，方便将配置分离
  * 
- * @author satansk
+ * 2. MongoDB 配置，MongoTemplate 已经定义在 AbstractMongoConfiguration 中。
+ * 3. @EnableMongoRepositories 注解启用 Repository 自动生成功能，
+ * 		扫描 baskPackages 包中继承 Repository<T, ID> 接口的接口，自动生成接口的实现。
  */
 @Configuration
+@EnableMongoRepositories(basePackages = "com.satansk.summer.site.repository")
 @EnableTransactionManagement(
         mode = AdviceMode.PROXY, proxyTargetClass = false,
         order = Ordered.LOWEST_PRECEDENCE
 )
 @ComponentScan(
-		basePackages = "com.satansk.summer",
+		basePackages = "com.satansk.summer.site",
 		excludeFilters = @ComponentScan.Filter({ Controller.class, ControllerAdvice.class })
 		)
-public class RootContextConfiguration {
+public class RootContextConfiguration extends AbstractMongoConfiguration {
 	
-    @Bean
+	private static final String mongName = "Summer";
+	private static final String mongoServer = "127.0.0.1";
+	private static final int mongoPort = 27017;
+
+	@Bean
     public ObjectMapper objectMapper()
     {
         ObjectMapper mapper = new ObjectMapper();
@@ -52,6 +63,8 @@ public class RootContextConfiguration {
                 false);
         return mapper;
     }
+	
+	/********************************** JPA 配置 *****************************************/
     
     /**
      * 在根应用上下文中数据源，需要在 Tomcat 的 context.xml 文件中预先定义好数据源
@@ -107,5 +120,17 @@ public class RootContextConfiguration {
 	@Bean
 	public PlatformTransactionManager annotationDrivenTransactionManager() {
 		return this.jpaTransactionManager();
+	}
+	
+	/********************************** MongoDB 配置 *****************************************/
+	
+    @Override
+	protected String getDatabaseName() {
+		return mongName;
+	}
+
+	@Override
+	public Mongo mongo() throws Exception {
+		return new MongoClient(mongoServer, mongoPort);
 	}
 }
