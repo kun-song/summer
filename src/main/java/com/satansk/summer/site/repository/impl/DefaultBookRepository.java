@@ -1,7 +1,7 @@
 package com.satansk.summer.site.repository.impl;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -17,7 +17,7 @@ import com.satansk.summer.site.repository.BookRepository;
 @Repository
 public class DefaultBookRepository implements BookRepository {
 
-	@Inject
+	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
