@@ -48,4 +48,14 @@ public class DefaultHistoryNoteService implements HistoryNoteService {
 		return null;
 	}
 
+	@Override
+	public boolean exist(String noteId) {
+		return historyNoteRepository.exists(noteId);
+	}
+
+	@Override
+	public boolean exist(HistoryNote note) {
+		return false;
+	}
+
 }

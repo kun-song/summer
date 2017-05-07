@@ -4,12 +4,17 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 1. @Document @Id 注解实现 Java 实体类与 MongoDB 文档的映射。
+ * 2. 类似 @Entity @Id 实现实体类与关系数据库表的映射。
+ */
 @Document
 public class HistoryNote {
 	
 	@Id
 	private String id;
 	
+	private String api;
 	private String content;
 	private int priority;
 	private String author;
@@ -22,6 +27,13 @@ public class HistoryNote {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getApi() {
+		return api;
+	}
+	public void setApi(String api) {
+		this.api = api;
 	}
 	
 	public String getContent() {

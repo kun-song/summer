@@ -2,7 +2,10 @@ package com.satansk.summer.site.rest;
 
 import javax.inject.Inject;
 
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.satansk.summer.config.annotation.RestEndpoint;
 import com.satansk.summer.site.bean.SummerResponse;
 import com.satansk.summer.site.entity.mongo.HistoryNote;
+import com.satansk.summer.site.exception.ResourceNotFoundException;
 import com.satansk.summer.site.service.impl.DefaultHistoryNoteService;
 
 /**
@@ -17,20 +21,49 @@ import com.satansk.summer.site.service.impl.DefaultHistoryNoteService;
  * 
  * @author satansk
  */
-@RestEndpoint(value = "note")
+@RestEndpoint(value = "notes")
 public class HistoryNoteRestEndpoint {
 	
 	@Inject
-	DefaultHistoryNoteService historyNoteService;
+	private DefaultHistoryNoteService historyNoteService;
+	
+	/************************************** REST 接口 ***************************************/
 	
 	/**
-	 * 添加一条备注
-	 * 
-	 * @return
+	 * 1. 获取 /rest/notes/ 支持的 HTTP 方法列表
+	 * 2. 因为要精确控制响应头信息，所以用 ResponseEntity 而不是 @ResponseBody
+	 * 3. 因为除了响应头之外，并没有实际的响应体，所以使用 Void
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	@ResponseBody
-	public SummerResponse addHistoryNote(@RequestBody HistoryNote note) {
+	@RequestMapping(method = RequestMethod.OPTIONS)
+	public ResponseEntity<Void> discover() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Allow", "OPTIONS, HEAD, GET, POST");
+		
+		return new ResponseEntity<Void>(null, headers, HttpStatus.NO_CONTENT);
+	}
+	
+	/**
+	 * 1. 获取 /rest/notes/{id} 支持的 HTTP 方法列表，如果 id 指定的资源不存在，则抛出异常。
+	 */
+	@RequestMapping(value = "{id}", method = RequestMethod.OPTIONS)
+	public ResponseEntity<Void> discover(@PathVariable("id") String id) {
+		if (historyNoteService.exist(id)) {
+			throw new ResourceNotFoundException();
+		}
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Allow", "OPTIONS, HEAD, GET, PUT, DELETE");
+		
+		return new ResponseEntity<>(null, headers, HttpStatus.NO_CONTENT);
+	}
+	
+	/**
+	 * 1. 两种响应类型：（1） @ResponseBody 注解 （2）ResponseEntity<body, headers, status_code> 返回类型。
+	 * 2. 使用 @ResponseBody 注解时，将使用 Controller 中的返回值作为响应。
+	 * 3. 使用 ResponseEntity<body, headers, status_code> 可以定制响应的头信息，更加灵活。
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<HistoryNote> addHistoryNote() {
 		
 		HistoryNote historyNote = new HistoryNote();
 		historyNote.setContent("content");
@@ -40,6 +73,6 @@ public class HistoryNoteRestEndpoint {
 		SummerResponse response = new SummerResponse();
 		response.setContent(historyNote);
 		
-		return response;
+		return new ResponseEntity<HistoryNote>(historyNote, HttpStatus.CREATED);
 	}
 }

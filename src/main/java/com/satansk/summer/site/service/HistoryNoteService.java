@@ -20,4 +20,8 @@ public interface HistoryNoteService {
 	HistoryNote getNote(String noteId);
 	
 	List<HistoryNote> getNoteList(int offset, int limit);
+	
+	boolean exist(String noteId);
+	
+	boolean exist(HistoryNote note);
 }
