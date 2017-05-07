@@ -24,7 +24,7 @@ public class Bootstrap implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
 		webContext.register(WebServletContextConfiguration.class);
 		
-		ServletRegistration.Dynamic dispatcher = container.addServlet("springWebDispatcher", new DispatcherServlet(webContext));
+		ServletRegistration.Dynamic dispatcher = container.addServlet("springServletDispatcher", new DispatcherServlet(webContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.setMultipartConfig(new MultipartConfigElement(null, 20_971_520L, 41_943_040L, 512_000));
 		dispatcher.addMapping("/");
