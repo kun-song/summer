@@ -85,6 +85,16 @@ XML 格式的 JPA 配置文件位于 `src/main/resources/META-INF/persistence.xm
 </persistence>
 ```
 
+## 区分多个 Spring Data 模块
+
+同一个项目中使用多个 Spring Data 模块，比如 Spring Data Jpa & Spring Data MongoDB，需要通过 `Repository` 定义或领域实体类型做出区分：
+
+1. 若 `Repository` 继承 **模块特有** 的 `Repository` 接口（比如 `MongoRepository`），则属于该模块。
+	* 若继承通用 `Repository` 则会造成歧义（比如 `Repository` 和 `CrudRepository`）。
+2. 若领域类用 **模块特有** 的注解标注（比如 `@Entiry` 属于 JPA，`@Document` 属于 MongoDB），则属于该模块。
+	* 在一个类上同时使用 `@Entity` `@Document` 也会造成歧义。
+3. 最后，可以通过指定扫描 `Repository` 的包路径来区分（比如 `@EnableMongoRepositores` 注解的 `basePackage` 属性）。
+
 ## 配置 MySQL 驱动
 
 本实例使用 MySQL 数据库，其驱动程序为 Connector/J，下载之后放在 tomcat 下的 /lib 目录即可。
