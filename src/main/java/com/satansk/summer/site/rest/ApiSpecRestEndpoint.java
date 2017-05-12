@@ -1,5 +1,7 @@
 package com.satansk.summer.site.rest;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,23 +17,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.satansk.summer.config.annotation.RestEndpoint;
 import com.satansk.summer.site.entity.mongo.ApiSpec;
-import com.satansk.summer.site.service.ApiSpecService;
+import com.satansk.summer.site.service.ApiManagerService;
 
 /**
  * @RequestMapping 使用请求路径 + 请求内容来做路由，只接受 Content-Type 为 application/json 的请求
  */
 @RestEndpoint
 @RequestMapping(
-		value = "api/spec",
+		value = "api/specs",
 		consumes = "application/json",
 		produces = "application/json"
 		)
-public class ApiSpecRestEndpoint {
-	
+public class ApiSpecRestEndpoint 
+{
 	private static final Logger logger = LogManager.getLogger(ApiSpecRestEndpoint.class);
 	
 	@Inject
-	private ApiSpecService apiSpecService;
+	private ApiManagerService apiManagerService;
 	
 	/************************************** REST 接口 ***************************************/
 	
@@ -38,13 +41,10 @@ public class ApiSpecRestEndpoint {
 	 * 允许使用 OPTIONS, GET, POST, PUT, DELETE 等方法。
 	 */
 	@RequestMapping(method = RequestMethod.OPTIONS)
-	public ResponseEntity<Void> discover() {
-		
+	public ResponseEntity<Void> discover() 
+	{
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Allow", "OPTIONS, GET, POST, PUT, DELETE");
-		
-		logger.info("Allow Http Methods: " + headers.getAllow());
-		
 		return new ResponseEntity<Void>(null, headers, HttpStatus.OK);
 	}
 	
@@ -55,8 +55,46 @@ public class ApiSpecRestEndpoint {
 	 * @return 保存后的 ApiSpec
 	 */
 	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<ApiSpec> add(@RequestBody(required = true) ApiSpec apiSpec) 
+	{	
+		ApiSpec spec = apiManagerService.saveApiSpec(apiSpec);
+		return new ResponseEntity<>(spec, HttpStatus.CREATED); 
+	}
+	
+	/**
+	 * 删除 ID 指定的 ApiSpec
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id) 
+	{
+		apiManagerService.deleteApiSpec(id);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	/**
+	 * 修改指定 ApiSpec
+	 * 
+	 * @param apiSpec
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public ApiSpec add(@RequestBody(required = true) ApiSpec apiSpec) {
-		return apiSpecService.save(apiSpec);
+	public ApiSpec modify(@RequestBody ApiSpec apiSpec) 
+	{
+		return apiManagerService.updateApiSpec(apiSpec);
+	}
+	
+	/**
+	 * 获取所有 ApiSpec 列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public List<ApiSpec> findAll()
+	{
+		return apiManagerService.findAllApiSpec();
 	}
 }

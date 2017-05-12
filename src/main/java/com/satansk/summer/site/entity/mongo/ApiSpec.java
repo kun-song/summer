@@ -36,6 +36,16 @@ public class ApiSpec {
 	 * 根路径
 	 */
 	private String basePath;
+	
+	/**
+	 * 创建时间
+	 */
+	private String createdTime;
+	
+	/**
+	 * 修改时间
+	 */
+	private String modifiedTime;
 
 	/********************************* Getter/Setter **********************************/
 	
@@ -87,12 +97,28 @@ public class ApiSpec {
 		this.basePath = basePath;
 	}
 	
-	/********************************* toString **********************************/
+	public String getCreatedTime() {
+		return createdTime;
+	}
 
+	public void setCreatedTime(String createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public String getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(String modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
+
+	/********************************* toString **********************************/
 	@Override
 	public String toString() {
 		return "ApiSpec [id=" + id + ", swagger=" + swagger + ", info=" + info + ", schemes=" + Arrays.toString(schemes)
-				+ ", host=" + host + ", basePath=" + basePath + "]";
+				+ ", host=" + host + ", basePath=" + basePath + ", createdTime=" + createdTime + ", modifiedTime="
+				+ modifiedTime + "]";
 	}
 	
 }
