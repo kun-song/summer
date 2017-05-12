@@ -1,5 +1,7 @@
 package com.satansk.summer.site.rest;
 
+import javax.inject.Inject;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.satansk.summer.config.annotation.RestEndpoint;
 import com.satansk.summer.site.entity.mongo.ApiSpec;
+import com.satansk.summer.site.service.ApiSpecService;
 
 /**
  * @RequestMapping 使用请求路径 + 请求内容来做路由，只接受 Content-Type 为 application/json 的请求
@@ -25,6 +28,9 @@ import com.satansk.summer.site.entity.mongo.ApiSpec;
 public class ApiSpecRestEndpoint {
 	
 	private static final Logger logger = LogManager.getLogger(ApiSpecRestEndpoint.class);
+	
+	@Inject
+	private ApiSpecService apiSpecService;
 	
 	/************************************** REST 接口 ***************************************/
 	
@@ -42,5 +48,15 @@ public class ApiSpecRestEndpoint {
 		return new ResponseEntity<Void>(null, headers, HttpStatus.OK);
 	}
 	
-
+	/**
+	 * 保存 ApiSpec
+	 * 
+	 * @param apiSpec 前端传入的 ApiSpec
+	 * @return 保存后的 ApiSpec
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public ApiSpec add(@RequestBody(required = true) ApiSpec apiSpec) {
+		return apiSpecService.save(apiSpec);
+	}
 }

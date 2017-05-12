@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.satansk.summer.site.entity.mongo.ApiPath;
 import com.satansk.summer.site.entity.mongo.ApiSpec;
 
 /**
  * 1. MongoRepository -> PagingAndSortingRepository -> CrudRepository -> Repository
  * 2. 
  */
-public interface ApiSpecRepository extends MongoRepository<ApiPath, String> {
+public interface ApiSpecRepository extends MongoRepository<ApiSpec, String> {
 	
 	/************************************* 构造查询方法 ****************************************/
 	
