@@ -17,7 +17,7 @@ const APISPECLIST: ApiSpec[] = [
     <ul class = "apispec-list">
       <li *ngFor = "let apispec of apiSpecList"
           [class.selected] = "apispec === apiSpecSelected"
-          (onclick) = "onSelect(apispec)">
+          (click) = "onSelect(apispec)">
         <span class = "badge">{{ apispec.id }}</span> {{ apispec.title }}
       </li>
     </ul>
