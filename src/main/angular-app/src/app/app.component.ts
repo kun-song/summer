@@ -18,12 +18,13 @@ const APISPECLIST: ApiSpec[] = [
       <li *ngFor = "let apispec of apiSpecList"
           [class.selected] = "apispec === apiSpecSelected"
           (onclick) = "onSelect(apispec)">
-        <span class = "badge">{{ apispec.title }}</span>
+        <span class = "badge">{{ apispec.id }}</span> {{ apispec.title }}
       </li>
     </ul>
 
     <api-spec-detail [apiSpec] = "apiSpecSelected"></api-spec-detail>
   `,
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   appTitle = 'Elastic API Manager';
