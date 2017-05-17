@@ -1,18 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { ApiSpec } from './mock/api-spec'
-
-const APISPECLIST: ApiSpec[] = [
-  {id: 1, title: 'eService'},
-  {id: 2, title: 'eSight'},
-  {id: 3, title: 'eCloud'}
-]
+import { ApiSpec } from './mock/api-spec';
+import { ApiSpecService } from './shared/api-spec.service';
 
 @Component({
   selector: 'my-app',
   template: `
     <header [title] = appTitle></header>
-
     <h2>ApiSpec List</h2>
     <ul class = "apispec-list">
       <li *ngFor = "let apispec of apiSpecList"
@@ -24,13 +18,24 @@ const APISPECLIST: ApiSpec[] = [
 
     <api-spec-detail [apiSpec] = "apiSpecSelected"></api-spec-detail>
   `,
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ ApiSpecService ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   appTitle = 'Elastic API Manager';
-  apiSpecList = APISPECLIST;
-
+  apiSpecList: ApiSpec[];
   apiSpecSelected: ApiSpec;
+
+  constructor(private apiSpecService: ApiSpecService) { }
+
+  getApiSpecList(): void {
+    this.apiSpecService.getApiSpecList()
+        .then(list => this.apiSpecList = list);
+  }
+
+  ngOnInit(): void {
+    this.getApiSpecList();
+  }
 
   onSelect(apispec: ApiSpec): void {
     this.apiSpecSelected = apispec;
