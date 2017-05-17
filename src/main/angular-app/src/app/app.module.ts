@@ -8,6 +8,9 @@ import { HeaderComponent } from './header/header.component';
 import { ApiSpecListComponent } from './api-spec-list/api-spec-list.component';
 import { ApiSpecDetailComponent } from './api-spec-detail/api-spec-detail.component';
 
+// Service
+import { ApiSpecService } from './shared/api-spec.service';
+
 /**
  * 使用 HeaderComponent/ApiSpecListComponent 之前，必须现在 declarations 中声明
  */
@@ -22,6 +25,7 @@ import { ApiSpecDetailComponent } from './api-spec-detail/api-spec-detail.compon
     ApiSpecListComponent,
     ApiSpecDetailComponent
   ],
+  providers: [ ApiSpecService ],
   bootstrap:    [
     AppComponent
   ]
