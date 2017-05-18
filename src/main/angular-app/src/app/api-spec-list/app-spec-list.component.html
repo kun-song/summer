@@ -6,4 +6,9 @@
     <span class = "badge">{{ apispec.id }}</span> {{ apispec.title }}
   </li>
 </ul>
-<api-spec-detail [apiSpec] = "apiSpecSelected"></api-spec-detail>
+<div *ngIf = "apiSpecSelected">
+  <h2>
+    {{ apiSpecSelected.title | uppercase }} is my title
+  </h2>
+  <button (click) = "gotoDetail()">View Details</button>
+</div>
