@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent }  from './app.component';
 
@@ -17,7 +18,14 @@ import { ApiSpecService } from './shared/api-spec.service';
 @NgModule({
   imports:      [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    // 路由定义：path 定义匹配的地址。component 定义导航到该路由时 Router 需要创建的组件。
+    RouterModule.forRoot([
+      {
+        path: 'api-spec-list',
+        component: ApiSpecListComponent
+      }
+    ])
   ],
   declarations: [
     AppComponent,
