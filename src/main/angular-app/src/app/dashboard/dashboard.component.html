@@ -1,8 +1,8 @@
 <h3>Top ApiSpec</h3>
 <div class = "grid grid-pad">
-  <div *ngFor = "let apiSpec of apiSpecList" class = "col-1-4">
+  <a *ngFor = "let apiSpec of apiSpecList" [routerLink] = "['/api/spec', apiSpec.id]" class = "col-1-4">
     <div class = "module api-spec">
       <h4>{{ apiSpec.title }}</h4>
     </div>
-  </div>
+  </a>
 </div>

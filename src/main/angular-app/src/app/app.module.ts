@@ -26,7 +26,7 @@ import { ApiSpecService } from './shared/api-spec.service';
         path: '',
         redirectTo: '/dashboard',
         pathMatch: 'full'
-      }
+      },
       {
         path: 'api-spec-list',
         component: ApiSpecListComponent
@@ -34,6 +34,10 @@ import { ApiSpecService } from './shared/api-spec.service';
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'api/spec/:id',
+        component: ApiSpecDetailComponent
       }
     ])
   ],
