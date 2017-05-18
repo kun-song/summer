@@ -8,10 +8,13 @@ import { AppComponent }  from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ApiSpecListComponent } from './api-spec-list/api-spec-list.component';
 import { ApiSpecDetailComponent } from './api-spec-detail/api-spec-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 // Service
 import { ApiSpecService } from './shared/api-spec.service';
+
+// 导入路由模块
+import { AppRoutingModule } from './app-routing.module';
 
 /**
  * 使用 HeaderComponent/ApiSpecListComponent 之前，必须现在 declarations 中声明
@@ -20,26 +23,7 @@ import { ApiSpecService } from './shared/api-spec.service';
   imports:      [
     BrowserModule,
     FormsModule,
-    // 路由定义：path 定义匹配的地址。component 定义导航到该路由时 Router 需要创建的组件。
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full'
-      },
-      {
-        path: 'api-spec-list',
-        component: ApiSpecListComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'api/spec/:id',
-        component: ApiSpecDetailComponent
-      }
-    ])
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
