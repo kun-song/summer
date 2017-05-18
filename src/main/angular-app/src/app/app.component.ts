@@ -10,21 +10,4 @@ import { ApiSpecService } from './shared/api-spec.service';
 })
 export class AppComponent implements OnInit {
   appTitle = 'Elastic API Manager';
-  apiSpecList: ApiSpec[];
-  apiSpecSelected: ApiSpec;
-
-  constructor(private apiSpecService: ApiSpecService) { }
-
-  getApiSpecList(): void {
-    this.apiSpecService.getApiSpecList()
-        .then(list => this.apiSpecList = list);
-  }
-
-  ngOnInit(): void {
-    this.getApiSpecList();
-  }
-
-  onSelect(apispec: ApiSpec): void {
-    this.apiSpecSelected = apispec;
-  }
 }
