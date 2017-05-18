@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -10,9 +10,10 @@ import { ApiSpecService } from '../shared/api-spec.service';
 @Component({
   selector: 'api-spec-detail',
   templateUrl: './api-spec-detail.component.html',
+  styleUrls: [ './api-spec-detail.component.css' ]
 })
 export class ApiSpecDetailComponent implements OnInit {
-  @Input() apiSpec: ApiSpec;
+  apiSpec: ApiSpec;
 
   constructor(
     private apiSpecService: ApiSpecService,
