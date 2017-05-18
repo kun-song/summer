@@ -8,6 +8,7 @@ import { AppComponent }  from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ApiSpecListComponent } from './api-spec-list/api-spec-list.component';
 import { ApiSpecDetailComponent } from './api-spec-detail/api-spec-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 // Service
 import { ApiSpecService } from './shared/api-spec.service';
@@ -22,8 +23,17 @@ import { ApiSpecService } from './shared/api-spec.service';
     // 路由定义：path 定义匹配的地址。component 定义导航到该路由时 Router 需要创建的组件。
     RouterModule.forRoot([
       {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full'
+      }
+      {
         path: 'api-spec-list',
         component: ApiSpecListComponent
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
       }
     ])
   ],
@@ -31,7 +41,8 @@ import { ApiSpecService } from './shared/api-spec.service';
     AppComponent,
     HeaderComponent,
     ApiSpecListComponent,
-    ApiSpecDetailComponent
+    ApiSpecDetailComponent,
+    DashboardComponent
   ],
   providers: [ ApiSpecService ],
   bootstrap:    [
