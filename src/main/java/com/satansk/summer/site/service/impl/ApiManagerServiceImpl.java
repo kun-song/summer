@@ -8,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.mongodb.core.query.Order;
 import org.springframework.stereotype.Service;
 
 import com.satansk.summer.site.constant.MongoConstants;
@@ -72,6 +71,12 @@ public class ApiManagerServiceImpl implements ApiManagerService {
 	public ApiSpec findApiSpecById(String id) 
 	{
 		return apiSpecRepository.findOne(id);
+	}
+
+	@Override
+	public long countApiSpec() 
+	{
+		return apiSpecRepository.count();
 	}
 	
 }

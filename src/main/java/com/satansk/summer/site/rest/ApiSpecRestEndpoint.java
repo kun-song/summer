@@ -24,7 +24,7 @@ import com.satansk.summer.site.service.ApiManagerService;
  */
 @RestEndpoint
 @RequestMapping(
-		value = "api/specs",
+		value = "api/spec",
 		consumes = "application/json",
 		produces = "application/json"
 		)
@@ -33,7 +33,7 @@ public class ApiSpecRestEndpoint
 	private static final Logger logger = LogManager.getLogger(ApiSpecRestEndpoint.class);
 	
 	@Inject
-	private ApiManagerService apiManagerService;
+	private ApiManagerService apiManager;
 	
 	/************************************** REST 接口 ***************************************/
 	
@@ -57,44 +57,48 @@ public class ApiSpecRestEndpoint
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<ApiSpec> add(@RequestBody(required = true) ApiSpec apiSpec) 
 	{	
-		ApiSpec spec = apiManagerService.saveApiSpec(apiSpec);
+		ApiSpec spec = apiManager.saveApiSpec(apiSpec);
 		return new ResponseEntity<>(spec, HttpStatus.CREATED); 
 	}
 	
 	/**
 	 * 删除 ID 指定的 ApiSpec
-	 * 
-	 * @param id
-	 * @return
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable String id) 
 	{
-		apiManagerService.deleteApiSpec(id);
+		apiManager.deleteApiSpec(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
 	/**
 	 * 修改指定 ApiSpec
-	 * 
-	 * @param apiSpec
-	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public ApiSpec modify(@RequestBody ApiSpec apiSpec) 
 	{
-		return apiManagerService.updateApiSpec(apiSpec);
+		return apiManager.updateApiSpec(apiSpec);
 	}
 	
 	/**
 	 * 获取所有 ApiSpec 列表
-	 * 
-	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
 	public List<ApiSpec> findAll()
 	{
-		return apiManagerService.findAllApiSpec();
+		return apiManager.findAllApiSpec();
 	}
+	
+	/**
+	 * 获取 ApiSec 总数
+	 */
+	@RequestMapping(value = "count", method = RequestMethod.GET)
+	@ResponseBody
+	public long count()
+	{
+		return apiManager.countApiSpec();
+	}
+	
 }

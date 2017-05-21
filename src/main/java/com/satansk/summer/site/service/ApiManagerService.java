@@ -22,4 +22,5 @@ public interface ApiManagerService {
 	
 	ApiSpec findApiSpecById(String id);
 	
+	long countApiSpec();
 }
