@@ -8,10 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.satansk.summer.config.annotation.RestEndpoint;
-import com.satansk.summer.site.bean.SummerResponse;
 import com.satansk.summer.site.entity.mongo.HistoryNote;
 import com.satansk.summer.site.exception.ResourceNotFoundException;
 import com.satansk.summer.site.service.impl.DefaultHistoryNoteService;
@@ -69,9 +67,6 @@ public class HistoryNoteRestEndpoint {
 		historyNote.setContent("content");
 		
 		historyNoteService.addNote(historyNote);
-		
-		SummerResponse response = new SummerResponse();
-		response.setContent(historyNote);
 		
 		return new ResponseEntity<HistoryNote>(historyNote, HttpStatus.CREATED);
 	}
