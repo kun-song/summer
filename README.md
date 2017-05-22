@@ -99,6 +99,14 @@ XML 格式的 JPA 配置文件位于 `src/main/resources/META-INF/persistence.xm
 
 本实例使用 MySQL 数据库，其驱动程序为 Connector/J，下载之后放在 tomcat 下的 /lib 目录即可。
 
+## 开发指南
+
+1. 进入 MongoDB 的 bin 目录，执行 `./mongod -f mongodb.conf &` 启动 MongoDB。
+2. Eclipse 中启动 `tomcat`，将 summer 加入 tomcat 容器中。
+3. 进入 angular-app 目录，执行 `npm start`，启动前端工程。
+	* 注意 `node.js` 版本必须大于 6.9，否则启动报错。
+	* 推荐使用 `nvm` 管理 `node.js` 版本。
+
 ## Pull Request 流程
 
 1. fork 项目到个人空间
