@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ApiSpec } from './mock/api-spec';
 import { ApiSpecService } from './shared/api-spec.service';
@@ -8,6 +8,6 @@ import { ApiSpecService } from './shared/api-spec.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   appTitle = 'Elastic API Manager';
 }
