@@ -1,4 +1,13 @@
+import { ApiInfo } from './api-info';
+
 export class ApiSpec {
-  id: number;
+  id: String;
+  swagger: String;
+  info: ApiInfo;
+  schemes: String[];
+  host: String;
+  basePath: String;
+  createdTime: String;
+  modifiedTime: String;
   title: String;
 }
