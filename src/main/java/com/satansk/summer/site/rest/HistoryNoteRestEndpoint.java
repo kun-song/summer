@@ -19,7 +19,12 @@ import com.satansk.summer.site.service.impl.DefaultHistoryNoteService;
  * 
  * @author satansk
  */
-@RestEndpoint(value = "notes")
+@RestEndpoint()
+@RequestMapping(
+		value = "notes",
+		consumes = "application/json",
+		produces = "application/json"
+		)
 public class HistoryNoteRestEndpoint {
 	
 	@Inject
