@@ -20,13 +20,14 @@ import com.satansk.summer.site.entity.mongo.ApiSpec;
 import com.satansk.summer.site.service.ApiManagerService;
 
 /**
- * @RequestMapping 使用请求路径 + 请求内容来做路由，只接受 Content-Type 为 application/json 的请求
+ * 1. @RequestMapping 使用请求路径 + 请求内容来做路由，只接受 Content-Type 为 application/json 的请求
+ * 2. Angular2 GET 方法默认不会携带 Content-Type 参数，去掉 consumes 注解保证路由正确。
  */
 @RestEndpoint
 @RequestMapping(
 		value = "api/spec",
-		consumes = "application/json",
-		produces = "application/json"
+//		consumes = "application/json; charset=UTF-8",
+		produces = "application/json; charset=UTF-8"
 		)
 public class ApiSpecRestEndpoint 
 {
