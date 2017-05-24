@@ -4,7 +4,6 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { ApiSpec } from '../mock/api-spec';
-import { APISPECLIST } from '../mock/api-spec-mock';
 
 @Injectable()
 export class ApiSpecService {
@@ -13,11 +12,10 @@ export class ApiSpecService {
 
   constructor(private http: Http) {}
 
-
   getApiSpecList(): Promise<ApiSpec[]> {
     return this.http.get(this.apiSpecListUrl)
                 .toPromise()
-                .then(response => response.json().data as ApiSpec[])
+                .then(response => response.json() as ApiSpec[])
                 .catch(this.errorHandler);
   }
 
@@ -25,7 +23,7 @@ export class ApiSpecService {
     const url = `${this.apiSpecListUrl}/${id}`;
     return this.http.get(url)
                 .toPromise()
-                .then(response => response.json().data as ApiSpec)
+                .then(response => response.json() as ApiSpec)
                 .catch(this.errorHandler);
   }
 

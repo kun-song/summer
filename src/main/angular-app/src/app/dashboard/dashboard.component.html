@@ -2,7 +2,7 @@
 <div class = "grid grid-pad">
   <a *ngFor = "let apiSpec of apiSpecList" [routerLink] = "['/api/spec', apiSpec.id]" class = "col-1-4">
     <div class = "module api-spec">
-      <h4>{{ apiSpec.title }}</h4>
+      <h4>{{ apiSpec.basePath }}</h4>
     </div>
   </a>
 </div>

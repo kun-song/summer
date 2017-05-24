@@ -9,5 +9,4 @@ export class ApiSpec {
   basePath: String;
   createdTime: String;
   modifiedTime: String;
-  title: String;
 }

@@ -46,8 +46,6 @@ public class CorsFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException 
 	{
-		logger.info("Request Content-Type = " + request.getContentType());
-
 		// 跨域共享设置
 		HttpServletResponse res = (HttpServletResponse) response;
 		
