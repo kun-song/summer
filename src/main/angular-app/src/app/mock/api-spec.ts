@@ -1,4 +1,4 @@
-import { ApiInfo } from './api-info';
+import { ApiInfo } from './ApiInfo';
 
 export class ApiSpec {
   id: String;
