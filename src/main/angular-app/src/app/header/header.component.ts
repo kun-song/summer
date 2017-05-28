@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { TabMenuModule, MenuItem } from 'primeng/primeng';
 
 @Component({
   selector: 'header',

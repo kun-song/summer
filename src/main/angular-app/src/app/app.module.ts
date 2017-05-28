@@ -11,6 +11,8 @@ import { ApiSpecListComponent } from './api-spec-list/api-spec-list.component';
 import { ApiSpecDetailComponent } from './api-spec-detail/api-spec-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { TabMenuModule } from 'primeng/primeng';
+
 // Service
 import { ApiSpecService } from './shared/api-spec.service';
 
@@ -25,7 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TabMenuModule
   ],
   declarations: [
     AppComponent,
