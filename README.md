@@ -1,5 +1,7 @@
 # Summer
 
+[![Build Status](https://travis-ci.org/satansk/Summer.svg?branch=master)](https://travis-ci.org/satansk/Summer)
+
 An api manager built on spring4 and angular2.
 
 ## Maven 镜像
