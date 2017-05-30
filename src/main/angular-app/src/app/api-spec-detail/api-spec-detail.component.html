@@ -1,9 +1,0 @@
-<div *ngIf = "apiSpec">
-  <h2>{{ apiSpec.id }} details!</h2>
-  <div><label>id: </label>{{ apiSpec.id }}</div>
-  <div>
-    <label>title: </label>
-    <input [(ngModel)] = "apiSpec.title" placeholder="title"/>
-  </div>
-  <button (click) = "goBack()" >Back</button>
-</div>
