@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class UserAuth
+public class UserInfo
 {
 	@Id
 	private String id;
