@@ -27,4 +27,10 @@ public class UserManagerSeviceImpl implements UserManagerService
 		return userInfoRepository.findOne(id);
 	}
 
+	@Override
+	public UserInfo findByName(String name) 
+	{
+		return userInfoRepository.findByName(name);
+	}
+
 }

@@ -9,4 +9,6 @@ public interface UserManagerService
 	UserInfo add(UserInfo user);
 	
 	UserInfo findById(String id);
+	
+	UserInfo findByName(String name);
 }
