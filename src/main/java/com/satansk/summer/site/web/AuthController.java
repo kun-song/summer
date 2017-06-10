@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping(
         value = "auth",
-        consumes = "application/json; charset=UTF-8",
+//        consumes = "application/json; charset=UTF-8",
         produces = "application/json; charset=UTF-8"
 )
 public class AuthController {

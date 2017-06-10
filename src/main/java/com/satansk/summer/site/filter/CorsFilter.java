@@ -25,7 +25,7 @@ import java.io.IOException;
  *     （1）@WebFilter 注解修饰过滤器。
  *     （2）@ServletComponentScan 注解修饰启动类
  */
-@Order(1)
+@Order(2)
 @WebFilter(
         filterName = "corsFilter",
         urlPatterns = "/*"
