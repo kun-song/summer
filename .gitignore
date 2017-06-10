@@ -23,3 +23,7 @@ e2e/**/*.js
 e2e/**/*.js.map
 _test-output
 _temp
+
+# idea 工程文件
+*.iml
+.idea
