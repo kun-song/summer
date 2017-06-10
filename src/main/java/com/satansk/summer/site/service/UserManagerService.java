@@ -1,14 +1,15 @@
 package com.satansk.summer.site.service;
 
-import com.satansk.summer.site.entity.mongo.UserInfo;
+import com.satansk.summer.site.domain.UserInfo;
 
-public interface UserManagerService
-{
-	/************************************** ApiSpec 接口 ***************************************/
-	
-	UserInfo add(UserInfo user);
-	
-	UserInfo findById(String id);
-	
-	UserInfo findByName(String name);
+/**
+ * Author:  satansk
+ * Email:   satansk@hotmail.com
+ * Date:    17/6/10
+ */
+public interface UserManagerService {
+
+    UserInfo add(UserInfo user);
+
+    UserInfo findByName(String name);
 }
