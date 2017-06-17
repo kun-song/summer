@@ -51,6 +51,15 @@ public class UserInfo {
         this.email = email;
     }
 
+    public UserInfo(String id, String name, String password, String email) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
+
+    public UserInfo() {}
+
     @Override
     public String toString() {
         return "UserAuth [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + "]";
