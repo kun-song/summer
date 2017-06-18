@@ -39,8 +39,9 @@ public class AuthController {
 
         try {
             // 名字不能重复
-            if (userManager.findByName(userInfo.getName()) != null) {
-                logger.error("Username exists");
+            UserInfo user = userManager.findByName(userInfo.getName());
+            if (user != null) {
+                logger.error(user.getName() + " has already exists");
                 return new ResponseEntity<>("Username has already exists", HttpStatus.NOT_MODIFIED);
             }
         } catch (Exception e) {
@@ -59,7 +60,7 @@ public class AuthController {
             session.setAttribute("username", user.getName());
         } else {
             // 持久化失败，提示再试一次
-            return new ResponseEntity<>("Register failed, please try again", HttpStatus.CREATED);
+            return new ResponseEntity<>("Register failed, please try again", HttpStatus.NOT_MODIFIED);
         }
 
         return new ResponseEntity<>(msg.toString(), HttpStatus.CREATED);
