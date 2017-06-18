@@ -5,23 +5,25 @@ import com.satansk.summer.site.repository.UserInfoRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 
 /**
  * Author:  satansk
  * Email:   satansk@hotmail.com
  * Date:    17/6/17
+ *
+ * 使用 @MockBean 注入依赖
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserManagerServiceImplTest {
-    @Mock private UserInfoRepository userInfoRepository;
-    @InjectMocks private UserManagerServiceImpl userManagerService;
+    @MockBean private UserInfoRepository userInfoRepository;
+    @Autowired private UserManagerServiceImpl userManagerService;
 
     @Test
     public void addTest() {
@@ -32,7 +34,7 @@ public class UserManagerServiceImplTest {
         UserInfo user = new UserInfo(id, name, password, email);
 
         // 模拟 UserInfoRepository
-        when(userInfoRepository.insert(user)).thenReturn(user);
+        given(userInfoRepository.insert(user)).willReturn(user);
 
         // 测试 UserManagerService
         UserInfo result = userManagerService.add(user);

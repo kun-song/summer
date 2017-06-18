@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,9 +19,15 @@ import static org.mockito.Mockito.when;
  * Author:  satansk
  * Email:   satansk@hotmail.com
  * Date:    17/6/17
+ *
+ * @DataMongoTest
+ *  1. 默认设置一个内存嵌入式 MongoDB 数据库
+ *  2. 配置 MongoTemplate
+ *  3. 扫描 @Document 注解类（普通 @Component 类不会被加载到 ApplicationContext中）
+ *  4. 配置 Repository
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataMongoTest
 public class UserInfoRepositoryTest {
 
     @Before
