@@ -62,6 +62,6 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserAuth [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + "]";
+        return "UserInfo [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + "]";
     }
 }
