@@ -50,7 +50,7 @@ public class AuthController {
         }
 
         // 防止误传 id
-//        userInfo.setId(null);
+        userInfo.setId(null);
         // 持久化
         UserInfo user = userManager.add(userInfo);
 
