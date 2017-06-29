@@ -21,4 +21,13 @@ public class SiteUtil {
         LocalDateTime now = LocalDateTime.now();
         return now.format(DateTimeFormatter.ofPattern(timePattern));
     }
+
+    /**
+     * 获取线程池容量
+     *
+     * @return 线程池大小
+     */
+    public static int getThreadN() {
+        return Runtime.getRuntime().availableProcessors() * 2 + 1;
+    }
 }
